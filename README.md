@@ -25,3 +25,30 @@ CineQuest is a premium, full-stack cinematic exploration platform designed to so
 
 ---
 
+## Getting Started
+
+### 1. Prerequisites
+- Python 3.9+
+- Node.js 18+
+- TMDB API Key ([Get one here](https://www.themoviedb.org/settings/api))
+
+### 2. Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+# Configure Environment
+cp .env.example .env  # Or create a .env file
+# Add your TMDB_API_KEY and DJANGO_SECRET_KEY
+
+# Prepare Database
+python manage.py migrate
+python manage.py sync_movies --genres
+python manage.py sync_movies --trending 2
+
+# Start Server
+python manage.py runserver
+```
+
