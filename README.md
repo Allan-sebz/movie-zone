@@ -52,3 +52,29 @@ python manage.py sync_movies --trending 2
 python manage.py runserver
 ```
 
+### 3. Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Navigate to `http://localhost:3000` to start exploring.
+
+---
+
+## Quality Assurance
+
+### Backend Unit Tests
+We maintain 5 core unit tests covering Model integrity and URL constructors.
+```bash
+python manage.py test
+```
+
+### Frontend Component Tests
+We maintain 3 behavioral tests using Jest for utility logic and UI rendering.
+```bash
+npm test
+```
+
+---
+
