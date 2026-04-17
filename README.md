@@ -95,3 +95,6 @@ Detailed work distribution, including specific code-file assignments for each me
 - **Date**: April 2026
 
 ---
+
+## License
+Released under the MIT License. For academic evaluation purposes only.
