@@ -87,3 +87,11 @@ Detailed work distribution, including specific code-file assignments for each me
 
 ---
 
+## Academic Credentials
+- **Course**: Software Construction (SYE3209)
+- **Institution**: Uganda Christian University
+- **Faculty**: Engineering, Design, and Technology
+- **Department**: Computing and Technology
+- **Date**: April 2026
+
+---
