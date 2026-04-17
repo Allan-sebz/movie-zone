@@ -78,3 +78,12 @@ npm test
 
 ---
 
+## Contributors & Work Distribution
+
+Detailed work distribution, including specific code-file assignments for each member, can be found in the [**CONTRIBUTIONS.md**](./CONTRIBUTIONS.md) file.
+
+**Lead Architect:** Geno Owor Joshua  
+**Technical Documentation:** Technical Report [**PDF/MD**](./Technical_Report.md)
+
+---
+
