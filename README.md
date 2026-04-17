@@ -15,3 +15,13 @@ CineQuest is a premium, full-stack cinematic exploration platform designed to so
 
 ---
 
+## Technical Stack
+
+- **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion (Animations).
+- **Backend**: Django REST Framework (DRF), Python 3.x.
+- **Database**: SQLite (Development) / PostgreSQL (Production ready).
+- **Testing**: Jest & React Testing Library (Frontend), Django TestCase (Backend).
+- **API**: Integrated with [TMDB v3 API](https://www.themoviedb.org/documentation/api).
+
+---
+
