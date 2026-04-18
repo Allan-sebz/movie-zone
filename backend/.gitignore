@@ -20,4 +20,8 @@ out/
 .idea/
 *.swp
 
+# OS
+.DS_Store
+Thumbs.db
+
 
