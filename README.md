@@ -56,6 +56,7 @@ python manage.py runserver
 ```bash
 cd frontend
 npm install
+
 npm run dev
 ```
 Navigate to `http://localhost:3000` to start exploring.
