@@ -75,4 +75,52 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {"anon": "100/hour", "user": "1000/hour"},
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+}
+
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    "CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000"
+).split(",")
+CORS_ALLOW_CREDENTIALS = True
+
+# TMDB API
+TMDB_API_KEY = os.environ.get("TMDB_API_KEY", "")
+TMDB_API_BASE_URL = "https://api.themoviedb.org/3"
+TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p"
+
+CACHES = {
+    "default": {
+        "BACKEND": os.environ.get(
+            "CACHE_BACKEND", "django.core.cache.backends.locmem.LocMemCache"
+        ),
+        "LOCATION": os.environ.get("CACHE_LOCATION", "cinequest-cache"),
+        "TIMEOUT": 3600,
+    }
+}
+
 
