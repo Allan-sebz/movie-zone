@@ -99,3 +99,92 @@ Detailed work distribution, including specific code-file assignments for each me
 
 ## License
 Released under the MIT License. For academic evaluation purposes only.
+
+---
+
+## How the Application Works (End-to-End)
+
+This section explains the full execution flow of CineQuest from UI interaction to backend logic and external data sources.
+
+### 1. System Architecture
+
+- **Frontend (Next.js 14 + TypeScript)** renders all user-facing pages and calls backend APIs.
+- **Backend (Django REST Framework)** exposes REST endpoints for movies, users, and recommendations.
+- **TMDB API** is the primary external movie metadata source.
+- **SQLite (local DB)** stores users, synced movie entities, watchlists, and interaction history.
+
+### 2. Request Flow
+
+1. A user opens a page in the frontend (for example Home, Search, Mood, Genre, Dashboard).
+2. Frontend components call typed API helpers from `src/lib/api.ts`.
+3. Requests go to `/api/...` in Next.js, which is rewritten to `http://localhost:8000/api/...`.
+4. Django routes requests through app-specific URL modules:
+	 - `/api/movies/...`
+	 - `/api/recommendations/...`
+	 - `/api/users/...`
+5. DRF views process request parameters and either:
+	 - read/write local DB models, or
+	 - call service-layer integrations (TMDB / Wikipedia), then return JSON.
+
+### 3. Frontend Layer (User Experience)
+
+- **Home page** fetches trending, now-playing, and top-rated collections in parallel.
+- **Search and discovery pages** pass filters (query, genre, year, rating, runtime, language, sorting) to backend endpoints.
+- **Movie detail pages** display rich data (overview, cast, recommendations, similar titles, optional Wikipedia summary).
+- **Auth context** keeps session tokens in memory/sessionStorage and automatically refreshes expired access tokens.
+
+### 4. Backend Apps and Responsibilities
+
+- **movies app**
+	- Domain models: `Movie`, `Genre`, `Person`, `MovieCast`, `WatchProvider`.
+	- Public endpoints for trending, search, now-playing, top-rated, compare, mood discovery, and time-machine capsules.
+	- ViewSet actions for movie recommendations/similar lists and Wikipedia enrichment.
+
+- **users app**
+	- Custom `User` model (with profile extras like avatar, favorite genres, country).
+	- Registration and profile endpoints.
+	- JWT authentication via SimpleJWT.
+
+- **recommendations app**
+	- Tracks interactions (view/like/dislike/watchlist/watched/search).
+	- Computes weighted genre preferences.
+	- Produces personalized recommendation feeds.
+	- Stores and manages user watchlist state and dashboard aggregates.
+
+### 5. Data Sources and Caching Strategy
+
+- **TMDBService** wraps TMDB API calls for search, discover, details, people, recommendations, and providers.
+- Django cache is used to reduce repeated external calls and improve response time.
+- **MovieSyncService** can persist TMDB movie/genre/person/provider data locally for richer local querying.
+- **WikipediaService** adds optional contextual summaries for movie detail pages.
+
+### 6. Personalization Logic
+
+1. User actions are recorded in `UserMovieInteraction`.
+2. Interactions are converted to weighted signals (for example like > watched > view > search, with dislike negative).
+3. Genre preference weights are normalized and saved per user.
+4. Recommendation engine discovers movies from top-weighted genres.
+5. Already watched/disliked movies are filtered out.
+6. Final candidates are ranked and returned as personalized results.
+
+### 7. Time Machine Feature
+
+- The time-machine endpoint builds a "cinematic year capsule" for a given year.
+- It combines TMDB discover/credits data with curated historical mappings (Oscar winners and notable global events).
+- Output includes yearly briefing, top films, key icons, and category highlights.
+
+### 8. Authentication and Security Model
+
+- Unauthenticated users can browse public movie content.
+- Personalized endpoints require JWT-authenticated users.
+- Frontend sends Bearer tokens automatically when available.
+- On token expiry, frontend refreshes via `/api/auth/token/refresh/` and retries failed requests.
+
+### 9. Running State Verified
+
+At the time of this update, both development services were started and responded successfully:
+
+- Backend: `http://127.0.0.1:8000` (Django)
+- Frontend: `http://localhost:3000` (Next.js)
+
+Both endpoints returned HTTP `200` during runtime verification.
