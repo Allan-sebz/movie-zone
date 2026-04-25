@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import {
   Search, Menu, X, Film, Compass, Star, Clapperboard,
   Sparkles, BarChart3, User, LogOut, LogIn, ArrowLeftRight,
-  History as HistoryIcon, Sun, Moon,
+  History as HistoryIcon,
 } from "lucide-react";
 import SearchModal from "@/components/SearchModal";
 import AuthModal from "@/components/AuthModal";
@@ -21,21 +21,7 @@ export default function Navbar() {
   const [authOpen, setAuthOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [searchInitialQuery, setSearchInitialQuery] = useState("");
-  const [theme, setTheme] = useState<"light" | "dark">("light");
   const router = useRouter();
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const active = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
-    setTheme(active);
-  }, []);
-
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
-    localStorage.setItem("cq_theme", next);
-  };
 
   // Voice Navigation Implementation
   const voiceCommands = useMemo(() => [
@@ -137,15 +123,6 @@ export default function Navbar() {
 
             {/* Actions */}
             <div className="flex items-center gap-2.5">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg text-white/30 hover:text-white/60 hover:bg-white/5 transition-all"
-                title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
-
               {/* Voice Assistant Toggle */}
               <button
                 onClick={isListening ? stopAssistant : startAssistant}
