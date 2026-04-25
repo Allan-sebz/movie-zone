@@ -41,7 +41,7 @@ export default function HomePage() {
     <div className="relative">
       <HeroSection movies={trending} />
 
-      <div className="relative z-10 -mt-14 md:-mt-28 space-y-16 md:space-y-20 pb-20 md:pb-24">
+      <div className="relative z-10 -mt-28 space-y-20 pb-24">
 
         {/* Trending this week */}
         <MovieCarousel
