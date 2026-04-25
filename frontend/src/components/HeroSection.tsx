@@ -161,12 +161,16 @@ export default function HeroSection({ movies }: HeroSectionProps) {
       <button
         onClick={goPrev}
         className="hidden md:flex absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 group"
+        aria-label="Previous slide"
+        title="Previous slide"
       >
         <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-gold transition-colors" />
       </button>
       <button
         onClick={goNext}
         className="hidden md:flex absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 group"
+        aria-label="Next slide"
+        title="Next slide"
       >
         <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-gold transition-colors" />
       </button>
@@ -178,6 +182,8 @@ export default function HeroSection({ movies }: HeroSectionProps) {
             key={m.id || m.tmdb_id}
             onClick={() => goTo(i)}
             className="group relative"
+            aria-label={`Go to slide ${i + 1}`}
+            title={`Go to slide ${i + 1}`}
           >
             <div className={`h-[3px] rounded-full transition-all duration-300 ${
               i === activeIndex ? "w-10 bg-gold" : "w-5 bg-white/15 hover:bg-white/25"
@@ -213,6 +219,8 @@ export default function HeroSection({ movies }: HeroSectionProps) {
                   ? "ring-2 ring-gold/60 scale-110 shadow-lg shadow-gold/10"
                   : "opacity-40 hover:opacity-70 scale-100"
               }`}
+              aria-label={`Select preview ${i + 1}`}
+              title={`Select preview ${i + 1}`}
             >
               <Image
                 src={pUrl}
