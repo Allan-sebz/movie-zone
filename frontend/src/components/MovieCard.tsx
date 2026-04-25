@@ -31,7 +31,7 @@ export default function MovieCard({
   return (
     <Link
       href={`/movie/${tmdbId}`}
-      className={`movie-card group flex-shrink-0 snap-start ${sizeClasses[size]}`}
+      className={`movie-card group flex-shrink-0 ${sizeClasses[size]}`}
       style={{ animationDelay: `${index * 50}ms` }}
     >
       {/* Poster */}
@@ -103,7 +103,7 @@ export function MovieCardSkeleton({ size = "md" }: { size?: "sm" | "md" | "lg" }
   const imgHeight = { sm: "h-[210px]", md: "h-[262px]", lg: "h-[330px]" };
 
   return (
-    <div className={`flex-shrink-0 snap-start ${sizeClasses[size]}`}>
+    <div className={`flex-shrink-0 ${sizeClasses[size]}`}>
       <div className={`${imgHeight[size]} skeleton rounded-xl mb-3`} />
       <div className="skeleton h-4 w-3/4 rounded mb-2" />
       <div className="skeleton h-3 w-1/2 rounded" />

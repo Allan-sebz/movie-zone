@@ -16,14 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="noise" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var saved=localStorage.getItem('cq_theme');var theme=(saved==='dark'||saved==='light')?saved:'light';document.documentElement.setAttribute('data-theme',theme);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`,
-          }}
-        />
-      </head>
+    <html lang="en" className="noise">
       <body className="min-h-screen flex flex-col relative">
         <div className="ambient-orb ambient-orb-1" />
         <div className="ambient-orb ambient-orb-2" />

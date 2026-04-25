@@ -45,7 +45,7 @@ export default function HeroSection({ movies }: HeroSectionProps) {
 
   if (!heroMovies.length) {
     return (
-      <div className="h-[82svh] md:h-[90vh] flex items-center justify-center relative overflow-hidden">
+      <div className="h-[90vh] flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-surface-1 to-surface-0" />
         <div className="relative text-center space-y-5 animate-slide-up">
           <h1 className="text-6xl md:text-8xl font-bold font-display">
@@ -64,7 +64,7 @@ export default function HeroSection({ movies }: HeroSectionProps) {
 
   return (
     <div
-      className="relative h-[84svh] sm:h-[88svh] md:h-[92vh] overflow-hidden"
+      className="relative h-[92vh] overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -94,7 +94,7 @@ export default function HeroSection({ movies }: HeroSectionProps) {
       <div className="hero-gradient absolute inset-0" />
       <div className="hero-side-gradient absolute inset-0" />
 
-      <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 lg:px-20 pb-24 md:pb-36 z-10">
+      <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 lg:px-20 pb-36 z-10">
         <div key={activeIndex} className="max-w-2xl animate-slide-up">
           {/* Top line */}
           <div className="flex items-center gap-3 mb-4">
@@ -114,12 +114,12 @@ export default function HeroSection({ movies }: HeroSectionProps) {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.05] mb-4 md:mb-5 text-white drop-shadow-2xl">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.05] mb-5 text-white drop-shadow-2xl">
             {movie.title}
           </h1>
 
           {/* Overview */}
-          <p className="text-sm sm:text-base md:text-lg text-white/50 line-clamp-3 md:line-clamp-2 mb-5 md:mb-6 max-w-xl leading-relaxed">
+          <p className="text-base md:text-lg text-white/50 line-clamp-2 mb-6 max-w-xl leading-relaxed">
             {movie.overview}
           </p>
 
@@ -138,7 +138,7 @@ export default function HeroSection({ movies }: HeroSectionProps) {
           )}
 
           {/* CTA buttons */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-3">
             <Link
               href={`/movie/${movie.tmdb_id || movie.id}`}
               className="group flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-gold to-gold-dim text-surface-0 font-semibold text-sm transition-all duration-300 hover:shadow-lg hover:shadow-gold/20 hover:scale-[1.03] active:scale-[0.98]"
@@ -160,30 +160,24 @@ export default function HeroSection({ movies }: HeroSectionProps) {
       {/* Navigation arrows  */}
       <button
         onClick={goPrev}
-        className="hidden md:flex absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 group"
-        aria-label="Previous slide"
-        title="Previous slide"
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 group"
       >
         <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-gold transition-colors" />
       </button>
       <button
         onClick={goNext}
-        className="hidden md:flex absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 group"
-        aria-label="Next slide"
-        title="Next slide"
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 group"
       >
         <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-gold transition-colors" />
       </button>
 
       {/* Slide indicators */}
-      <div className="absolute bottom-16 md:bottom-20 left-6 md:left-10 lg:left-20 z-20 flex items-center gap-2">
+      <div className="absolute bottom-20 left-6 md:left-10 lg:left-20 z-20 flex items-center gap-2">
         {heroMovies.map((m, i) => (
           <button
             key={m.id || m.tmdb_id}
             onClick={() => goTo(i)}
             className="group relative"
-            aria-label={`Go to slide ${i + 1}`}
-            title={`Go to slide ${i + 1}`}
           >
             <div className={`h-[3px] rounded-full transition-all duration-300 ${
               i === activeIndex ? "w-10 bg-gold" : "w-5 bg-white/15 hover:bg-white/25"
@@ -219,8 +213,6 @@ export default function HeroSection({ movies }: HeroSectionProps) {
                   ? "ring-2 ring-gold/60 scale-110 shadow-lg shadow-gold/10"
                   : "opacity-40 hover:opacity-70 scale-100"
               }`}
-              aria-label={`Select preview ${i + 1}`}
-              title={`Select preview ${i + 1}`}
             >
               <Image
                 src={pUrl}
