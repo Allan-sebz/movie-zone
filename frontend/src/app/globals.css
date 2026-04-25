@@ -21,7 +21,31 @@
   --accent-hover: #f05050;
 }
 
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 html { scroll-behavior: smooth; }
+
+html,
+body {
+  overflow-x: clip;
+}
+
+html[data-theme="light"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html[data-theme="light"] img,
+html[data-theme="light"] video,
+html[data-theme="light"] iframe,
+html[data-theme="light"] canvas {
+  filter: invert(1) hue-rotate(180deg);
+}
 
 body {
   background: var(--surface-0);
@@ -41,6 +65,10 @@ body {
 
 .scroll-x {
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -224,4 +252,10 @@ body {
   background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.6) 140%);
   pointer-events: none;
   z-index: 50;
+}
+
+@media (max-width: 640px) {
+  .scroll-mask {
+    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+  }
 }

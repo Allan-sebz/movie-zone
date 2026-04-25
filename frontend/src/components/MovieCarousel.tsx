@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type WheelEvent } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, ArrowRight, Star, Clock, Film } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import MovieCard, { MovieCardSkeleton } from "@/components/MovieCard";
 import type { MovieCompact } from "@/types/movie";
 
@@ -39,27 +39,36 @@ export default function MovieCarousel({
     }
   };
 
+  const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el || el.scrollWidth <= el.clientWidth) return;
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+
+    e.preventDefault();
+    el.scrollBy({ left: e.deltaY, behavior: "smooth" });
+  };
+
   return (
     <section className="relative">
       {/* Header */}
-      <div className="flex items-end justify-between px-6 md:px-10 lg:px-20 mb-6">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 px-6 md:px-10 lg:px-20 mb-6">
+        <div className="flex items-center gap-3 md:gap-4 min-w-0">
           {icon && (
             <div className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center">
               {icon}
             </div>
           )}
-          <div>
-            <h2 className="text-xl md:text-2xl font-bold font-display text-white/95">
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold font-display text-white/95 truncate">
               {title}
             </h2>
             {subtitle && (
-              <p className="text-xs text-white/30 mt-0.5">{subtitle}</p>
+              <p className="text-xs text-white/30 mt-0.5 line-clamp-2">{subtitle}</p>
             )}
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 self-start sm:self-auto">
           <button
             onClick={() => scroll("left")}
             className="w-8 h-8 rounded-lg glass flex items-center justify-center hover:border-gold/20 transition-all group"
@@ -90,7 +99,8 @@ export default function MovieCarousel({
       <div className="scroll-mask">
         <div
           ref={scrollRef}
-          className="scroll-x flex gap-4 px-6 md:px-10 lg:px-20 pb-4"
+          onWheel={handleWheel}
+          className="scroll-x flex gap-4 px-6 md:px-10 lg:px-20 pb-4 snap-x snap-mandatory"
         >
           {loading
             ? Array.from({ length: 8 }).map((_, i) => (
