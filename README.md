@@ -15,7 +15,7 @@ CineQuest is a premium, full-stack cinematic exploration platform designed to so
 
 ---
 
-## Technical Stack
+## the Technical Stack
 
 - **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS, Framer Motion (Animations).
 - **Backend**: Django REST Framework (DRF), Python 3.x.
