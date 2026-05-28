@@ -5,7 +5,7 @@
 CineQuest is a premium, full-stack cinematic exploration platform designed to solve "Choice Paralysis." It transforms raw metadata from The Movie Database (TMDB) into an intuitive, emotionally resonant discovery experience.
 
 
-## Key Features
+## Key Features.
 
 - **Smart Mood Discovery**: A custom innovation that curates movies based on emotional states (e.g., "Adrenaline Rush", "Rainy Day Melancholy") rather than just static genres.
 - **Real-time Analytics**: Dynamic dashboard tracking trending titles and user preference matrices.
