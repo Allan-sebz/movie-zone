@@ -15,7 +15,7 @@ node_modules/
 .next/
 out/
 
-# IDE
+# IDE.
 .vscode/
 .idea/
 *.swp
