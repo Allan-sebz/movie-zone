@@ -10,7 +10,7 @@ db.sqlite3
 staticfiles/
 media/
 
-# Node
+# Node.
 node_modules/
 .next/
 out/
